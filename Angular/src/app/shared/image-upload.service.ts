@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageUploadService {
-  public urlBase: string = "https://localhost:7110";
+  public urlBase: string = environment.apiUrl;
 
   // prediction: new Observable = of();
 

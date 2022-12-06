@@ -13,7 +13,7 @@ export class ImageUploadComponent implements OnInit {
 
   userImage: string = null;
   url: any;
-  predictions:  Prediction[] = [];
+  predictions: Prediction[] = [];
 
   constructor(private imageUploadService: ImageUploadService) { }
 
@@ -21,6 +21,7 @@ export class ImageUploadComponent implements OnInit {
     this.predictions = this.imageUploadService.getPredictions();
     this.imageUploadService.predictionListChangedEvent.subscribe(result => {
       this.predictions = result;
+      console.log(this.predictions);
     })
   }
 

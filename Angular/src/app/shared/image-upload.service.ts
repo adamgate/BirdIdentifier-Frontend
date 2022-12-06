@@ -26,7 +26,14 @@ export class ImageUploadService {
     // Send the post request to the backend
     this.httpClient.post<Prediction>(`${this.urlBase}/images`, formData)
     .subscribe(data => {
-      this.predictions.push(data);
+      this.predictions.push(new Prediction(
+        data['ImageChecksum'],
+        data['Timestamp'],
+        data['PredictionName'],
+        data['PredictionScore'],
+        data['ExactLink'],
+        data['SearchLink']
+      ));
 
       this.send();
     });

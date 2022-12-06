@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Prediction } from '../models/prediction';
 
@@ -10,39 +10,45 @@ import { Prediction } from '../models/prediction';
 export class ImageUploadService {
   public urlBase: string = environment.apiUrl;
 
-  prediction: Prediction;
+  predictionListChangedEvent = new Subject<Prediction[]>();
+  predictions: Prediction[] = [];
 
   constructor(private httpClient: HttpClient) { }
 
-  //Send an image to the ML model for identification
-  async uploadImage(selectedFile) : Promise<Prediction> {
+  /*
+   * Send an image to the backend for identification.
+   */
+  uploadImage(selectedFile) {
+    // Load image into proper format for a post
     const formData = new FormData();
     formData.append('image', selectedFile, selectedFile.name);
 
-    this.httpClient.post<IPrediction>(`${this.urlBase}/images`, formData)
+    // Send the post request to the backend
+    this.httpClient.post<Prediction>(`${this.urlBase}/images`, formData)
     .subscribe(data => {
-      this.prediction = new Prediction(
-        data.ExactLink,
-        data.Timestamp,
-        data.PredictionName,
-        data.PredictionScore,
-        data.ExactLink,
-        data.SearchLink
-      )
+      this.predictions.push(data);
 
-      console.log(this.prediction);
-      return this.prediction;
+      console.log(this.predictions);
+      this.send();
     });
-
-    return null;
   }
-}
 
-  interface IPrediction {
-    ImageChecksum: string,
-    Timestamp: string,
-    PredictionName: string,
-    PredictionScore: number,
-    ExactLink: string,
-    SearchLink: string
+  send() : void {
+    this.predictionListChangedEvent.next(this.predictions.slice())
+  }
+
+  getPredictions() : Prediction[] {
+    return this.predictions;
+  }
+
+  // Get an individual prediction by the timestamp
+  getPrediction(timestamp: string): Prediction {
+    let prediction: Prediction = this.predictions.find(prediction => prediction.timestamp === timestamp);
+
+    if (prediction !== undefined) 
+      return prediction;
+    else
+      return null;
+  }
+
 }

@@ -12,13 +12,20 @@ export class ImageUploadComponent implements OnInit {
   validFile: boolean = false;
 
   userImage: string = null;
-  prediction: Prediction = null;
+  predictions:  Prediction[] = [];
 
   constructor(private imageUploadService: ImageUploadService) { }
 
   ngOnInit(): void {
+    this.predictions = this.imageUploadService.getPredictions();
+    this.imageUploadService.predictionListChangedEvent.subscribe(result => {
+      this.predictions = result;
+    })
   }
 
+  /*
+   * Ensure that a file has been selected correctly, and is a valid file.
+   */
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
 
@@ -31,37 +38,44 @@ export class ImageUploadComponent implements OnInit {
     this.validFile = this.isImage(fileExt);
   }
 
-  async onUpload() {
+  /*
+   * Validate file and then have image uplaod service handle uploading it.
+   */
+  onUpload() {
     if (this.onFileSelected.length === 0)
       return;
     
-   this.prediction = await this.imageUploadService.uploadImage(<File>this.selectedFile);
+   this.imageUploadService.uploadImage(<File>this.selectedFile);
 
-   console.log('prediction: ' + this.prediction);
-
-    if (this.prediction) {
-      const reader = new FileReader();
-      reader.readAsDataURL(this.selectedFile);
-      reader.onload = (_event) => {
-        this.userImage = reader.readAsDataURL.toString();
-      }
-    }
+    // if (this.prediction) {
+    //   const reader = new FileReader();
+    //   reader.readAsDataURL(this.selectedFile);
+    //   reader.onload = (_event) => {
+    //     this.userImage = reader.readAsDataURL.toString();
+    //   }
+    // }
   }
 
-   getExtension(filename: string) {
-    var parts = filename.split('.');
-    return parts[parts.length - 1];
-   }
-
-   isImage(ext: string) {
-    switch (ext.toLowerCase()) {
-      case 'jpg':
-      case 'jpeg':
-      case 'png':
-        return true;
-    }
-    return false;
+  /*
+   * Get a file's extension.
+   */
+  getExtension(filename: string) {
+  var parts = filename.split('.');
+  return parts[parts.length - 1];
   }
+
+  /*
+   * Ensure that a given file extension is an image.
+   */
+  isImage(ext: string) {
+  switch (ext.toLowerCase()) {
+    case 'jpg':
+    case 'jpeg':
+    case 'png':
+      return true;
+  }
+  return false;
+}
 
 
 }

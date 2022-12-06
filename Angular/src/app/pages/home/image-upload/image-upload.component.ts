@@ -26,7 +26,7 @@ export class ImageUploadComponent implements OnInit {
   }
 
   /*
-   * Ensure that a file has been selected correctly, and is a valid file.
+   * Ensure that a file has been selected, and that it's valid.
    */
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];

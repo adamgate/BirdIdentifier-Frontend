@@ -10,6 +10,8 @@ import { ImageUploadComponent } from './pages/home/image-upload/image-upload.com
 import { AboutComponent } from './pages/about/about.component';
 import { HomeComponent } from './pages/home/home.component';
 import { WhatAreYouComponent } from './pages/what-are-you/what-are-you.component';
+import { PredictionItemComponent } from './pages/predictions/prediction-item/prediction-item.component';
+import { PredictionListComponent } from './pages/predictions/prediction-list/prediction-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { WhatAreYouComponent } from './pages/what-are-you/what-are-you.component
     ImageUploadComponent,
     AboutComponent,
     HomeComponent,
-    WhatAreYouComponent
+    WhatAreYouComponent,
+    PredictionItemComponent,
+    PredictionListComponent
   ],
   imports: [
     BrowserModule,

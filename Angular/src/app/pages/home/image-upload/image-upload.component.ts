@@ -12,6 +12,7 @@ export class ImageUploadComponent implements OnInit {
   validFile: boolean = false;
 
   userImage: string = null;
+  url: any;
   predictions:  Prediction[] = [];
 
   constructor(private imageUploadService: ImageUploadService) { }
@@ -36,6 +37,13 @@ export class ImageUploadComponent implements OnInit {
     var fileExt = this.getExtension(this.selectedFile.name);
 
     this.validFile = this.isImage(fileExt);
+
+    const reader = new FileReader();
+    this.userImage = event.target.file;
+    reader.readAsDataURL(this.selectedFile);
+    reader.onload = (_event) => {
+      this.url = reader.result;
+    }
   }
 
   /*
@@ -46,14 +54,6 @@ export class ImageUploadComponent implements OnInit {
       return;
     
    this.imageUploadService.uploadImage(<File>this.selectedFile);
-
-    // if (this.prediction) {
-    //   const reader = new FileReader();
-    //   reader.readAsDataURL(this.selectedFile);
-    //   reader.onload = (_event) => {
-    //     this.userImage = reader.readAsDataURL.toString();
-    //   }
-    // }
   }
 
   /*

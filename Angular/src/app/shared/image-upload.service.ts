@@ -28,7 +28,6 @@ export class ImageUploadService {
     .subscribe(data => {
       this.predictions.push(data);
 
-      console.log(this.predictions);
       this.send();
     });
   }

@@ -17,5 +17,5 @@
 <p class="alert alert-danger" *ngIf="(selectedFile != null && !validFile)">Please upload a .png, .jpg, or .jpeg.</p>
 <p class="alert alert-success" *ngIf="(selectedFile != null && validFile)">Your file is ready for upload.</p>
 
-<img src="{{userImage}}" [hidden]="!userImage"/>
-<p [hidden]="!(predictions.length > 0)">This bird is probably a: {{predictions[predictions.length-1].predictionName}}</p>
+<img [src]="url" [hidden]="!url"/>
+<p [hidden]="!(predictions.length > 0)">This bird is probably a: {{predictions[predictions.length-1]?.predictionName}}</p>

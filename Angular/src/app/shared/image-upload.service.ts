@@ -18,7 +18,7 @@ export class ImageUploadService {
     const formData = new FormData();
     formData.append('image', selectedFile, selectedFile.name);
 
-    return this.http.post<string>(`${this.urlBase}/images`, formData, {
+    return this.http.post<string>(`${this.urlBase}images`, formData, {
       reportProgress: true,
       observe: 'events'
     }).subscribe((data) => {

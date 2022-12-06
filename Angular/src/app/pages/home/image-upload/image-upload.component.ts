@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Prediction } from 'src/app/models/prediction';
 import { ImageUploadService } from 'src/app/shared/image-upload.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ImageUploadComponent implements OnInit {
   validFile: boolean = false;
 
   userImage: string = null;
-  prediction: string = null;
+  prediction: Prediction = null;
 
   constructor(private imageUploadService: ImageUploadService) { }
 
@@ -30,11 +31,11 @@ export class ImageUploadComponent implements OnInit {
     this.validFile = this.isImage(fileExt);
   }
 
-  onUpload() {
+  async onUpload() {
     if (this.onFileSelected.length === 0)
       return;
     
-   this.imageUploadService.imageUpload(<File>this.selectedFile);
+   this.prediction = await this.imageUploadService.uploadImage(<File>this.selectedFile);
 
    console.log('prediction: ' + this.prediction);
 

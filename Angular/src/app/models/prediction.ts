@@ -8,3 +8,4 @@ export class Prediction {
         public searchLink: string
     ) {}
 }
+

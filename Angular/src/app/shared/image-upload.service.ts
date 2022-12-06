@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Prediction } from '../models/prediction';
 
 @Injectable({
   providedIn: 'root'
@@ -9,20 +10,39 @@ import { environment } from 'src/environments/environment';
 export class ImageUploadService {
   public urlBase: string = environment.apiUrl;
 
-  // prediction: new Observable = of();
+  prediction: Prediction;
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   //Send an image to the ML model for identification
-  imageUpload(selectedFile) {
+  async uploadImage(selectedFile) : Promise<Prediction> {
     const formData = new FormData();
     formData.append('image', selectedFile, selectedFile.name);
 
-    return this.http.post<string>(`${this.urlBase}images`, formData, {
-      reportProgress: true,
-      observe: 'events'
-    }).subscribe((data) => {
-        return data;
-      });
+    this.httpClient.post<IPrediction>(`${this.urlBase}/images`, formData)
+    .subscribe(data => {
+      this.prediction = new Prediction(
+        data.ExactLink,
+        data.Timestamp,
+        data.PredictionName,
+        data.PredictionScore,
+        data.ExactLink,
+        data.SearchLink
+      )
+
+      console.log(this.prediction);
+      return this.prediction;
+    });
+
+    return null;
   }
+}
+
+  interface IPrediction {
+    ImageChecksum: string,
+    Timestamp: string,
+    PredictionName: string,
+    PredictionScore: number,
+    ExactLink: string,
+    SearchLink: string
 }

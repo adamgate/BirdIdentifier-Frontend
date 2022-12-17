@@ -12,7 +12,7 @@ export class ImageUploadComponent implements OnInit {
   validFile: boolean = false;
 
   userImage: string = null;
-  url: any;
+  url: ArrayBuffer | string;
   predictions: Prediction[] = [];
 
   constructor(private imageUploadService: ImageUploadService) { }
@@ -55,6 +55,7 @@ export class ImageUploadComponent implements OnInit {
       return;
     
    this.imageUploadService.uploadImage(<File>this.selectedFile);
+   console.log(this.url);
   }
 
   /*

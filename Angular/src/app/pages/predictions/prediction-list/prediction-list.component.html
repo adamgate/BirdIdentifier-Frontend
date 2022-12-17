@@ -1,1 +1,5 @@
-<p>prediction-list works!</p>
+<div class="row">
+    <div class="col-sm-6" >
+      <app-prediction-item *ngFor="let prediction in predictions" [prediction]="prediction"></app-prediction-item>
+    </div>
+</div>

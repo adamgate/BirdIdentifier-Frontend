@@ -15,6 +15,7 @@ namespace CommandLine
         {
             baseUrl = @"https://localhost:7110";
             client = new HttpClient();
+            client.BaseAddress = new Uri("baseUrl");
         }
 
         public async Task Run()
@@ -57,7 +58,7 @@ namespace CommandLine
             }
         }
 
-        public void PrintMenu()
+        private void PrintMenu()
         {
             Console.WriteLine("--------------------------------------------------------------------------------");
             Console.WriteLine("Welcome to BirdIdentifier. Please select an option:");
@@ -69,7 +70,7 @@ namespace CommandLine
             Console.WriteLine();
         }
 
-        public async Task CheckBackendStatus()
+        private async Task CheckBackendStatus()
         {
             Console.WriteLine("Talking to BirdIdentifier backend...");
 
@@ -79,7 +80,7 @@ namespace CommandLine
                 HttpResponseMessage response = await client.GetAsync($"{baseUrl}/heartbeat");
 
                 if (response.StatusCode.ToString().Equals("OK"))
-                    Console.WriteLine($"Status {response.StatusCode}: Success while talking to BirdIdentifierBackend.");
+                    Console.WriteLine($"Status {response.StatusCode}: Success while talking to BirdIdentifier backend.");
                 else
                     Console.WriteLine($"Status {response.StatusCode}");
             }
@@ -90,7 +91,14 @@ namespace CommandLine
             }
         }
 
-        public void IdentifyBird()
+        private string SelectImage()
+        {
+            string imagePath = Console.ReadLine();
+
+            return imagePath;
+        }
+
+        private async Task IdentifyBird()
         {
             //load image 
 

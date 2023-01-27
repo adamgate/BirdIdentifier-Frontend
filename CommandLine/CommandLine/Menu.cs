@@ -15,7 +15,7 @@ namespace CommandLine
         {
             baseUrl = @"https://localhost:7110";
             client = new HttpClient();
-            client.BaseAddress = new Uri("baseUrl");
+            client.BaseAddress = new Uri(baseUrl);
         }
 
         public async Task Run()

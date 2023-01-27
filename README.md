@@ -4,5 +4,5 @@
 A collection of different frontends that allow users to upload images of birds so that they can be classified. Most users will be less interested in this, and more interested in the BirdIdentifier backend.
 
 Options
-* Angular/TypeScript (not finished, hosted on Netlify)
+* [Angular/TypeScript](https://bird-identifier.netlify.app/) (not finished, hosted on Netlify)
 * C# Console App (in progress)

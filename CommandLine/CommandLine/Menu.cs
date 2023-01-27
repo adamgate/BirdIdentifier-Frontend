@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic.FileIO;
 
 namespace CommandLine
 {
@@ -33,7 +34,7 @@ namespace CommandLine
                 {
                     case "0":
                         Console.WriteLine("Closing program...");
-                        System.Threading.Thread.Sleep(3000);
+                        System.Threading.Thread.Sleep(2000);
                         break;
 
                     case "1":
@@ -63,9 +64,9 @@ namespace CommandLine
             Console.WriteLine("--------------------------------------------------------------------------------");
             Console.WriteLine("Welcome to BirdIdentifier. Please select an option:");
             Console.WriteLine("0: Quit program.");
-            Console.WriteLine("1: See menu.");
+            Console.WriteLine("1: Print menu.");
             Console.WriteLine("2: Identify a bird in an image.");
-            Console.WriteLine("3: Check BirdIdentifier backend's status.");
+            Console.WriteLine("3: Check BirdIdentifier's backend status.");
             Console.WriteLine("--------------------------------------------------------------------------------");
             Console.WriteLine();
         }
@@ -80,27 +81,61 @@ namespace CommandLine
                 HttpResponseMessage response = await client.GetAsync($"{baseUrl}/heartbeat");
 
                 if (response.StatusCode.ToString().Equals("OK"))
-                    Console.WriteLine($"Status {response.StatusCode}: Success while talking to BirdIdentifier backend.");
+                {
+                    Console.Write($"Status {response.StatusCode}: Success while talking to BirdIdentifier backend.");
+                    Console.WriteLine();
+                }
                 else
-                    Console.WriteLine($"Status {response.StatusCode}");
+                {
+                    Console.Write($"Status {response.StatusCode}");
+                    Console.WriteLine();
+                }
             }
             catch (HttpRequestException e)
             {
-                Console.WriteLine("Error while talking to BirdIdentifier backend:");
-                Console.WriteLine(e.Message);
+                Console.Write($"Error while talking to BirdIdentifier backend: {e.Message}");
+                Console.WriteLine();
             }
         }
 
-        private string SelectImage()
+        private string GetImagePath()
         {
-            string imagePath = Console.ReadLine();
+            string filePath = "";
+            bool acceptable = false;
 
-            return imagePath;
+            while (acceptable.Equals(false))
+            {
+                Console.Write("Please enter the image's file path: ");
+                filePath = Console.ReadLine();
+
+                if (filePath == null || filePath.Equals(""))
+                {
+                    Console.WriteLine("The file path cannot be empty. Please try again.");
+                    Console.WriteLine();
+                    continue;
+                }
+                else
+                {
+                    var image = new System.IO.FileInfo(filePath);
+
+                    if (!image.Exists)
+                    {
+                        Console.WriteLine($"Unable to access image at {filePath}, {nameof(filePath)}");
+                    }
+                }
+
+                acceptable = true;
+            }
+
+            return filePath;
         }
 
         private async Task IdentifyBird()
         {
-            //load image 
+            //get image path
+            string imagePath = GetImagePath();
+
+            //load image
 
             //convert image to proper format
 

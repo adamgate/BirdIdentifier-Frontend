@@ -120,7 +120,16 @@ namespace CommandLine
 
                     if (!image.Exists)
                     {
-                        Console.WriteLine($"Unable to access image at {filePath}, {nameof(filePath)}");
+                        Console.WriteLine($"Unable to access image at location \"{filePath}\"");
+                        break;
+                    }
+
+                    if (image.Extension != ".jpg" &&
+                        image.Extension != ".jpeg" &&
+                        image.Extension != ".png")
+                    {
+                        Console.WriteLine("File is not of type .png, .jpg, or .jpeg.");
+                        break;
                     }
                 }
 
@@ -129,6 +138,13 @@ namespace CommandLine
 
             return filePath;
         }
+
+        //private FileInfo LoadImage(string imagePath)
+        //{
+        //    FileInfo image;
+
+        //    return image;
+        //}
 
         private async Task IdentifyBird()
         {

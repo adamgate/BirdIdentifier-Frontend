@@ -153,7 +153,7 @@ namespace CommandLine
             var content = new MultipartFormDataContent();
             var byteImage = new ByteArrayContent(image);
 
-            content.Add(byteImage, "image");
+            content.Add(byteImage, "image", Path.GetFileName(imagePath));
             Console.WriteLine("Done.");
 
             return content;
@@ -188,9 +188,11 @@ namespace CommandLine
                 return;
             }
 
+            //print the identified bird for the user
             if (response.Content != null)
             {
-                Prediction prediction = JsonConvert.DeserializeObject<Prediction>(response.Content.ToString());
+                string body = response.Content.ReadAsStringAsync().Result;
+                Prediction prediction = JsonConvert.DeserializeObject<Prediction>(body);
                 Console.WriteLine(prediction.ToString());
             }
         }

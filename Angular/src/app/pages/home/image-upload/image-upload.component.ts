@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Prediction } from 'src/app/models/prediction';
 import { ImageUploadService } from 'src/app/shared/image-upload.service';
 
@@ -12,8 +12,9 @@ export class ImageUploadComponent implements OnInit {
   validFile: boolean = false;
 
   userImage: string = null;
-  url: ArrayBuffer | string;
+  url: string;
   predictions: Prediction[] = [];
+  @Output() latestPrediction = new EventEmitter<Prediction>();
 
   constructor(private imageUploadService: ImageUploadService) { }
 
@@ -21,7 +22,7 @@ export class ImageUploadComponent implements OnInit {
     this.predictions = this.imageUploadService.getPredictions();
     this.imageUploadService.predictionListChangedEvent.subscribe(result => {
       this.predictions = result;
-      console.log(this.predictions);
+      this.addLatestPrediction(this.predictions[this.predictions.length-1]);
     })
   }
 
@@ -43,19 +44,18 @@ export class ImageUploadComponent implements OnInit {
     this.userImage = event.target.file;
     reader.readAsDataURL(this.selectedFile);
     reader.onload = (_event) => {
-      this.url = reader.result;
+      this.url = reader.result as string;
     }
   }
 
   /*
-   * Validate file and then have image uplaod service handle uploading it.
+   * Validate file and then have image upload service handle uploading it.
    */
   onUpload() {
     if (this.onFileSelected.length === 0)
       return;
     
    this.imageUploadService.uploadImage(<File>this.selectedFile);
-   console.log(this.url);
   }
 
   /*
@@ -73,11 +73,17 @@ export class ImageUploadComponent implements OnInit {
   switch (ext.toLowerCase()) {
     case 'jpg':
     case 'jpeg':
+    case 'jpe':
+    case 'jif':
     case 'png':
       return true;
   }
   return false;
 }
 
+addLatestPrediction(prediction: Prediction) {
+  prediction.img = this.url;
+  this.latestPrediction.emit(prediction);
+}
 
 }

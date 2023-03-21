@@ -1,11 +1,9 @@
-<div class="card">
-    <img src="{{prediction.imageChecksum}}" class="card-img-top"/>
+<div class="card" [hidden]="!prediction">
+    <img src="{{prediction.img}}" class="card-img-top"/>
     <div class="card-body">
-      <h5 class="card-title">{{prediction.predictionName}}</h5>
+      <h5 class="card-title" *ngIf="prediction.predictionName">{{prediction.predictionName}}</h5>
       <p class="card-text">We are {{prediction.predictionScore}}% certain this is a(n) {{prediction.predictionName}}.</p>
-      <a href="#!" class="btn btn-primary">Button</a>
+      <a href="{{prediction.exactLink}}" class="btn btn-primary">Find out more!</a>
+      <a href="{{prediction.searchLink}}" class="btn btn-primary">Find out more!</a>
     </div>
   </div>
-
-<!-- <p class="alert alert-danger" *ngIf="(selectedFile != null && !validFile)">Please upload a .png, .jpg, or .jpeg.</p>
-<p class="alert alert-success" *ngIf="(selectedFile != null && validFile)">Your file is ready for upload.</p> -->

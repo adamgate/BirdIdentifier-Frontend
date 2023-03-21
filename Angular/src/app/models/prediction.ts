@@ -1,6 +1,6 @@
 export class Prediction {
     constructor(
-        public imageChecksum: string,
+        public img: string,
         public timestamp: string,
         public predictionName: string,
         public predictionScore: number,

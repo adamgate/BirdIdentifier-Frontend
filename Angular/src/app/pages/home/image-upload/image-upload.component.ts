@@ -8,6 +8,7 @@ import { ImageUploadService } from 'src/app/shared/image-upload.service';
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent implements OnInit {
+  fileName: string = null;
   selectedFile: File = null;
   validFile: boolean = false;
 
@@ -21,7 +22,7 @@ export class ImageUploadComponent implements OnInit {
     this.predictions = this.imageUploadService.getPredictions();
     this.imageUploadService.predictionListChangedEvent.subscribe(result => {
       this.predictions = result;
-      this.addLatestPrediction(this.predictions[this.predictions.length-1]);
+      this.addLatestPrediction(this.predictions[this.predictions.length - 1]);
     })
   }
 
@@ -38,6 +39,7 @@ export class ImageUploadComponent implements OnInit {
     var fileExt = this.getExtension(this.selectedFile.name);
 
     this.validFile = this.isImage(fileExt);
+    this.fileName = this.selectedFile.name;
 
     const reader = new FileReader();
     reader.readAsDataURL(this.selectedFile);
@@ -52,36 +54,35 @@ export class ImageUploadComponent implements OnInit {
   onUpload() {
     if (this.onFileSelected.length === 0)
       return;
-    
-   this.imageUploadService.uploadImage(<File>this.selectedFile);
+
+    this.imageUploadService.uploadImage(<File>this.selectedFile);
   }
 
   /*
    * Get a file's extension.
    */
   getExtension(filename: string) {
-  var parts = filename.split('.');
-  return parts[parts.length - 1];
+    var parts = filename.split('.');
+    return parts[parts.length - 1];
   }
 
   /*
    * Ensure that a given file extension is an image.
    */
   isImage(ext: string) {
-  switch (ext.toLowerCase()) {
-    case 'jpg':
-    case 'jpeg':
-    case 'jpe':
-    case 'jif':
-    case 'png':
-      return true;
+    switch (ext.toLowerCase()) {
+      case 'jpg':
+      case 'jpeg':
+      case 'jpe':
+      case 'jif':
+      case 'png':
+        return true;
+    }
+    return false;
   }
-  return false;
-}
 
-addLatestPrediction(prediction: Prediction) {
-  prediction.img = this.url;
-  this.latestPrediction.emit(prediction);
-}
-
+  addLatestPrediction(prediction: Prediction) {
+    prediction.img = this.url;
+    this.latestPrediction.emit(prediction);
+  }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Prediction } from '../models/prediction';
+import { Prediction } from '../../models/prediction';
 
 @Injectable({
   providedIn: 'root'

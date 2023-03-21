@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Prediction } from 'src/app/models/prediction';
-import { ImageUploadService } from 'src/app/shared/image-upload.service';
+import { ImageUploadService } from 'src/app/pages/image-upload/image-upload.service';
 
 @Component({
   selector: 'app-image-upload',

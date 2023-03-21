@@ -14,17 +14,11 @@
 
 body {
     font-family: 'Cabin', sans-serif;
-	background: #8e9eab;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+	/* background: #8e9eab; */
 }
 
 nav {
-	background: #8e9eab;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #C8CBCC, #687C8D);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #C8CBCC, #687C8D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+	background: var(--bg-primary);
 }
 
 .bg-light-theme {
@@ -39,32 +33,6 @@ nav {
 }
 
 .btn {
-    display: block;
-    text-align: center;
-	width: 140px;
-	height: 40px;
-    text-decoration: none;
-    font-size: 1em;
-    color: #fff;
-	border: none;
-    
-    border-radius: 6px;
-    margin: 10px;
-    /* padding: 1em 3em;() */
-    background-size: 200% auto;
-    color: white;
-    box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
-    background-image: linear-gradient(to right, #895cf2 0%, #ffabf4 50%, #895cf2 100%);
-    transition: 0.5s;
-  }  
-
-  .btn:hover {
-		background-position: right center;
-		color: white;
-  }
-
-
-/* .btn {
 	display: block;
 	width: 140px;
 	height: 40px;
@@ -89,4 +57,4 @@ nav {
 	background: #F9EA8B;
 	box-shadow: 0 3px 0 0 #9B9989;
 	cursor:not-allowed;
-} */
+}

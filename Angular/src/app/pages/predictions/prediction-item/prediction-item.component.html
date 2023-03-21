@@ -3,7 +3,6 @@
     <div class="card-body">
       <h5 class="card-title" *ngIf="prediction.predictionName">{{prediction.predictionName}}</h5>
       <p class="card-text">We are {{prediction.predictionScore}}% certain this is a(n) {{prediction.predictionName}}.</p>
-      <a href="{{prediction.exactLink}}" class="btn btn-primary">Find out more!</a>
-      <a href="{{prediction.searchLink}}" class="btn btn-primary">Find out more!</a>
+      <a href="{{prediction.searchLink}}" class="btn" target="_blank">Find out more!</a>
     </div>
   </div>

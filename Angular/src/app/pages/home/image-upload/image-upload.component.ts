@@ -11,7 +11,6 @@ export class ImageUploadComponent implements OnInit {
   selectedFile: File = null;
   validFile: boolean = false;
 
-  userImage: string = null;
   url: string;
   predictions: Prediction[] = [];
   @Output() latestPrediction = new EventEmitter<Prediction>();
@@ -41,7 +40,6 @@ export class ImageUploadComponent implements OnInit {
     this.validFile = this.isImage(fileExt);
 
     const reader = new FileReader();
-    this.userImage = event.target.file;
     reader.readAsDataURL(this.selectedFile);
     reader.onload = (_event) => {
       this.url = reader.result as string;

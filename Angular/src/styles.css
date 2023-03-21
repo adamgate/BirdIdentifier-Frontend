@@ -21,6 +21,10 @@ nav {
 	background: var(--bg-primary);
 }
 
+.pointer {
+	cursor: pointer;
+}
+
 .bg-light-theme {
     display: block;
 	/* width: 140px;

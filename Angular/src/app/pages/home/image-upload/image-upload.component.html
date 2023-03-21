@@ -1,12 +1,12 @@
-<div class="bg-light-theme" style="padding: 15px; border-radius: 5px; margin: 5px;">
+<div class="bg-light-theme" style="padding: 15px; border-radius: 5px;">
 	<div class="center">
 		<div class="title">
 			<h1>Click the icon below and select an image</h1>
 		</div>
 
 		<div class="dropzone">
-			<img src="../../../../assets/images/upload.svg" class="upload-icon" style="cursor: pointer;"/>
-			<input type="file" class="upload-input" accept=".png,.jpg,.jpeg" (change)="onFileSelected($event)" style="cursor: pointer;"/>
+			<img src="../../../../assets/images/upload.svg" class="upload-icon pointer"/>
+			<input type="file" class="upload-input pointer" accept=".png,.jpg,.jpeg" (change)="onFileSelected($event)"/>
 		</div>
 		<p class="text-black" [hidden]="!fileName">{{fileName}}</p>
 		<button type="button" class="btn" name="uploadbutton"
@@ -14,5 +14,7 @@
 	</div>
 </div>
 
-<p class="alert alert-danger" *ngIf="(selectedFile != null && !validFile)">Incorrect filetype. Please select a PNG or JPEG.</p>
-<p class="alert alert-success" *ngIf="(selectedFile != null && validFile)">Your file is ready for upload.</p>
+<div class="m-2">
+	<p class="alert alert-danger" *ngIf="(selectedFile != null && !validFile)">Incorrect filetype. Please select a PNG or JPEG.</p>
+	<p class="alert alert-success" *ngIf="(selectedFile != null && validFile)">Your file is ready for upload.</p>
+</div>

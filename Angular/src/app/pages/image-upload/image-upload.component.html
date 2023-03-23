@@ -1,4 +1,4 @@
-<div class="bg-light-theme" style="padding: 15px; border-radius: 5px;">
+<!-- <div class="upload-background" style="padding: 15px; border-radius: 5px;">
 	<div class="center">
 		<div class="title">
 			<h1>Click the icon below and select an image</h1>
@@ -17,4 +17,33 @@
 <div class="m-2">
 	<p class="alert alert-danger" *ngIf="(selectedFile != null && !validFile)">Incorrect filetype. Please select a PNG or JPEG.</p>
 	<p class="alert alert-success" *ngIf="(selectedFile != null && validFile)">Your file is ready for upload.</p>
+</div> -->
+
+<div class="jumbotron">
+    <h2>Identify</h2>
+    <p>
+        Please make sure that the bird is clearly visible and is the focus of  the image!
+        <br>
+        We recommend that the image is no larger than 1000x1000 pixels. 
+    </p>
+    <div class="row justify-content-md-center">
+        <div class="col-md-6 my-5">
+            <div class="file-selector text-center">
+				<h3>Select Image</h3>
+				<input type="file" class="file-input" accept=".png,.jpg,.jpeg" (change)="onFileSelected($event)"/>
+            </div>
+			<div class="">
+				<p class="danger text-center" *ngIf="(selectedFile != null && !validFile)">Incorrect filetype. Please select a PNG or JPEG.</p>
+				<p class="ready text-center" *ngIf="(selectedFile != null && validFile)">Your file is ready for upload.</p>
+			</div>
+		</div>
+    </div>
+    <div class="row" [hidden]="!selectedFile">
+        <div class="col">
+            <img>
+        </div>
+    </div>
+    <div class="sticky-bottom row justify-content-center mt-5">
+		<button type="button" class="btn" name="uploadbutton"(click)="onUpload()" [disabled]="(selectedFile == null || !validFile)">Identify</button>
+    </div>  
 </div>

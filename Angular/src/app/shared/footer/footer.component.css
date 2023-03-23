@@ -3,18 +3,13 @@
 }
 
 .blurb a:link {
-	color: white;
+	color: var(--hl-secondary);
 	text-decoration: none;
 }
 
 .blurb a:visited {
 	color: gray;
 }
-
-.blurb a:active {
-	color: var(--hl-primary)
-}
-
 
 .footer {
 	font-size: 14px;

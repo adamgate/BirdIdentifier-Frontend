@@ -1,8 +1,13 @@
-<div class="card" [hidden]="!prediction">
+<!-- <div class="card" [hidden]="!prediction"> -->
+<div class="card w-50 h-50 m-auto">
     <img src="{{prediction.img}}" class="card-img-top"/>
-    <div class="card-body">
-      <h5 class="card-title text-capitalize" *ngIf="prediction.predictionName">{{prediction.predictionName}}</h5>
-      <p class="card-text">We are {{prediction.predictionScore}}% certain this is a(n) <p class="text-capitalize">{{prediction.predictionName}}.</p>
-      <a href="{{prediction.searchLink}}" class="btn" target="_blank">Find out more!</a>
+    <div class="body">
+      <div class="card-body m-auto">
+        <h5 class="card-title text-capitalize" *ngIf="prediction.predictionName">{{prediction.predictionName}}</h5>
+        <div class="d-flex justify-content-center">
+          <p class="card-text">We are {{prediction.predictionScore}}% certain this is a(n)&nbsp; <p class="text-capitalize text-"><strong>{{prediction.predictionName}}.</strong></p>
+        </div>
+        <a href="{{prediction.searchLink}}" class="btn" target="_blank">Find out more!</a>
+      </div>
     </div>
   </div>

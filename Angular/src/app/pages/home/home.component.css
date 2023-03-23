@@ -5,3 +5,12 @@ hr.center {
     text-align: center;
     width: 50%;
 }
+
+.main-content {
+    margin:auto;
+    margin-top: 15px;
+	background: rgb(215, 214, 215);
+    padding: 15px;
+    overflow: auto;
+    border-radius: 5px;
+}

@@ -12,6 +12,6 @@ export class PredictionItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.prediction = new Prediction('','','', 0,'','');
+    this.prediction = new Prediction('','','', 0,'');
   }
 }

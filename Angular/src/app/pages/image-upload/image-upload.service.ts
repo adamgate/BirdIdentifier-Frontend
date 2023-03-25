@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Subject, catchError, Observable } from 'rxjs';
+
 import { environment } from 'src/environments/environment';
 import { Prediction } from '../../models/prediction';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -33,15 +36,13 @@ export class ImageUploadService {
           d['Timestamp'],
           d['PredictionName'],
           d['PredictionScore'],
-          d['ExactLink'],
-          d['SearchLink']
+          d['LearnMoreLink']
           ));
           
           this.sendPredictionUpdate();
           this.sendErrorUpdate(null);
         },
         error: (e) => {
-          console.log(e);
             this.sendErrorUpdate(`${e.statusText}. Code: ${e.status}`);
           }
         });

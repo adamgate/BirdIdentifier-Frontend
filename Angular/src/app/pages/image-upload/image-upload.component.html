@@ -11,7 +11,7 @@
 				<h3>Select Image</h3>
 				<input type="file" class="file-input" accept=".png,.jpg,.jpeg" (change)="onFileSelected($event)" />
 			</div>
-			<div class="">
+			<div>
 				<!-- TODO- ensure that whichever was caused by the most recent action is the only visible one. -->
 				<p class="danger text-center" *ngIf="(selectedFile != null && !validFile) && error == null">Incorrect filetype. Please select a PNG or JPEG.</p>
 				<p class="ready text-center" *ngIf="(selectedFile != null && validFile) && error == null">Your file is ready for upload.</p>

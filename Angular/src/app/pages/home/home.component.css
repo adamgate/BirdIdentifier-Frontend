@@ -9,6 +9,7 @@ hr.center {
 .main-content {
     margin:auto;
     margin-top: 15px;
+    margin-bottom: 15px;
 	background: #F3F5F6;
     padding: 15px;
     overflow: auto;

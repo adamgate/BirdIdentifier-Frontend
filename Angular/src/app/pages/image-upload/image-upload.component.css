@@ -1,3 +1,12 @@
+h3 {
+	border: 1px dashed;
+	padding: 5px;
+}
+
+img {
+	border-radius: 5px;
+}
+
 .file-selector {
 	max-width: 100%;
 	background-color: var(--bg-primary);
@@ -25,7 +34,3 @@
 	margin-top:3px;
 }
 
-h3 {
-	border: 1px dashed;
-	padding: 5px;
-}

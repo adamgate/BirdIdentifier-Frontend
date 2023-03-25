@@ -1,6 +1,5 @@
 <!-- <div class="card" [hidden]="!prediction"> -->
-<div class="card w-50 h-50 m-auto">
-    <img src="{{prediction.img}}" class="card-img-top"/>
+<div class="card w-50 h-50 m-auto mb-3" [hidden]="!prediction">
     <div class="body">
       <div class="card-body m-auto">
         <h5 class="card-title text-capitalize" *ngIf="prediction.predictionName">{{prediction.predictionName}}</h5>

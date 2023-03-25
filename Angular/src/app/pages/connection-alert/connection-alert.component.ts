@@ -7,7 +7,7 @@ import { ConnectionCheckerService } from './connection-checker.service';
   styleUrls: ['./connection-alert.component.css']
 })
 export class ConnectionAlertComponent implements OnInit {
- connectionStatusOk: boolean = true;
+ connectionStatusOk: boolean = false;
 
   constructor(private connectionService: ConnectionCheckerService) { }
 

@@ -14,8 +14,8 @@ export class ConnectionCheckerService {
 
   constructor(private httpClient: HttpClient) { }
 
-  checkConnectionStatus() {
-    this.httpClient.get(`${this.urlBase}/heartbeat`, {observe: 'response'})
+  async checkConnectionStatus() {
+    await this.httpClient.get(`${this.urlBase}/heartbeat`, {observe: 'response'})
       .subscribe(data => {
         if (data.status === 200 || data.ok === true) 
           this.connectionStatusOk = true;

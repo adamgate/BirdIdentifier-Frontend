@@ -1,8 +1,8 @@
 <!-- <div class="card" [hidden]="!prediction"> -->
-<div class="card w-50 h-50 m-auto mb-3" [hidden]="!prediction">
+<div class="card w-50 h-50 m-auto mb-3" [hidden]="!prediction || prediction.predictionName != ' ' ">
     <div class="body">
       <div class="card-body m-auto">
-        <h5 class="card-title text-capitalize" *ngIf="prediction.predictionName">{{prediction.predictionName}}</h5>
+        <h5 class="card-title text-capitalize">{{prediction.predictionName}}</h5>
         <div class="d-flex justify-content-center">
           <p class="card-text">We are {{prediction.predictionScore}}% certain this is a(n)&nbsp; <p class="text-capitalize text-"><strong>{{prediction.predictionName}}.</strong></p>
         </div>

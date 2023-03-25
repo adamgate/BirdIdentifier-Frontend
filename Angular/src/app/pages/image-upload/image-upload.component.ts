@@ -11,7 +11,8 @@ export class ImageUploadComponent implements OnInit {
   fileName: string = null;
   selectedFile: File = null;
   validFile: boolean = false;
-  img: string;
+  img: string = null;
+  error: string = null;
 
   predictions: Prediction[] = [];
   @Output() latestPrediction = new EventEmitter<Prediction>();
@@ -19,11 +20,17 @@ export class ImageUploadComponent implements OnInit {
   constructor(private imageUploadService: ImageUploadService) { }
 
   ngOnInit(): void {
-    this.predictions = this.imageUploadService.getPredictions();
-    this.imageUploadService.predictionListChangedEvent.subscribe(result => {
-      this.predictions = result;
-      this.addLatestPrediction(this.predictions[this.predictions.length - 1]);
-    })
+      this.predictions = this.imageUploadService.getPredictions();
+
+      this.imageUploadService.predictionListChangedEvent.subscribe(result => {
+        this.predictions = result;
+        this.addLatestPrediction(this.predictions[this.predictions.length - 1]);
+
+    });
+
+    this.imageUploadService.errorChangedEvent.subscribe(error => {
+      this.error = error;
+    });
   }
 
   /*

@@ -10,6 +10,7 @@ import { Prediction } from '../../models/prediction';
 export class ImageUploadService {
   public urlBase: string = environment.apiUrl;
 
+  errorChangedEvent = new Subject<string>();
   predictionListChangedEvent = new Subject<Prediction[]>();
   predictions: Prediction[] = [];
 
@@ -25,22 +26,33 @@ export class ImageUploadService {
 
     // Send the post request to the backend
     this.httpClient.post<Prediction>(`${this.urlBase}/images`, formData)
-    .subscribe(data => {
-      this.predictions.push(new Prediction(
-        data['ImageChecksum'],
-        data['Timestamp'],
-        data['PredictionName'],
-        data['PredictionScore'],
-        data['ExactLink'],
-        data['SearchLink']
-      ));
-
-      this.send();
-    });
+    .subscribe({
+      next: (d) => {
+        this.predictions.push(new Prediction(
+          d['ImageChecksum'],
+          d['Timestamp'],
+          d['PredictionName'],
+          d['PredictionScore'],
+          d['ExactLink'],
+          d['SearchLink']
+          ));
+          
+          this.sendPredictionUpdate();
+          this.sendErrorUpdate(null);
+        },
+        error: (e) => {
+          console.log(e);
+            this.sendErrorUpdate(`${e.statusText}. Code: ${e.status}`);
+          }
+        });
   }
 
-  send() : void {
+  sendPredictionUpdate() : void {
     this.predictionListChangedEvent.next(this.predictions.slice())
+  }
+
+  sendErrorUpdate(error: string) : void {
+    this.errorChangedEvent.next(error);
   }
 
   getPredictions() : Prediction[] {

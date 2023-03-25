@@ -12,10 +12,11 @@
 				<input type="file" class="file-input" accept=".png,.jpg,.jpeg" (change)="onFileSelected($event)" />
 			</div>
 			<div class="">
-				<p class="danger text-center" *ngIf="(selectedFile != null && !validFile)">Incorrect filetype. Please
-					select a PNG or JPEG.</p>
-				<p class="ready text-center" *ngIf="(selectedFile != null && validFile)">Your file is ready for upload.
-				</p>
+				<!-- TODO- ensure that whichever was caused by the most recent action is the only visible one. -->
+				<p class="danger text-center" *ngIf="(selectedFile != null && !validFile) && error == null">Incorrect filetype. Please select a PNG or JPEG.</p>
+				<p class="ready text-center" *ngIf="(selectedFile != null && validFile) && error == null">Your file is ready for upload.</p>
+				<p class="danger text-center" *ngIf="error != null">There was an error: "{{error}}". Please try again later.</p>
+				
 			</div>
 		</div>
 	</div>

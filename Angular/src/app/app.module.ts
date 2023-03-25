@@ -10,6 +10,7 @@ import { ImageUploadComponent } from './pages/image-upload/image-upload.componen
 import { HomeComponent } from './pages/home/home.component';
 import { WhatBirdAreYouComponent } from './pages/what-bird-are-you/what-bird-are-you.component';
 import { PredictionItemComponent } from './pages/predictions/prediction-item/prediction-item.component';
+import { ConnectionAlertComponent } from './pages/connection-alert/connection-alert.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PredictionItemComponent } from './pages/predictions/prediction-item/pre
     ImageUploadComponent,
     HomeComponent,
     WhatBirdAreYouComponent,
-    PredictionItemComponent
+    PredictionItemComponent,
+    ConnectionAlertComponent
   ],
   imports: [
     BrowserModule,

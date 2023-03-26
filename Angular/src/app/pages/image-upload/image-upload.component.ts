@@ -13,6 +13,7 @@ export class ImageUploadComponent implements OnInit {
   validFile: boolean = false;
   img: string = null;
   error: string = null;
+  loading: boolean = false;
 
   predictions: Prediction[] = [];
   @Output() latestPrediction = new EventEmitter<Prediction>();
@@ -26,10 +27,17 @@ export class ImageUploadComponent implements OnInit {
         this.predictions = result;
         this.addLatestPrediction(this.predictions[this.predictions.length - 1]);
 
+        //Turn the loading spinner off
+        this.switchLoading();
     });
 
     this.imageUploadService.errorChangedEvent.subscribe(error => {
       this.error = error;
+
+      //Turn the loading spinner off
+      if (error != null) {
+        this.switchLoading();
+      }
     });
   }
 
@@ -88,7 +96,13 @@ export class ImageUploadComponent implements OnInit {
     return false;
   }
 
+  // Send prediction up to the home component to be sent to the prediction component
   addLatestPrediction(prediction: Prediction) {
     this.latestPrediction.emit(prediction);
+  }
+
+  // Turn the loading spinner on or off
+  switchLoading() {
+    this.loading = !this.loading;
   }
 }

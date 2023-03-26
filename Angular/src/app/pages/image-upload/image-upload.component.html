@@ -26,7 +26,13 @@
 		</div>
 	</div>
 	<div class="row justify-content-center mt-5">
-		<button type="button" class="btn" name="uploadbutton" (click)="onUpload()"
-			[disabled]="(selectedFile == null || !validFile)">Identify</button>
+		<button type="button" class="btn" name="uploadbutton" (click)="onUpload(); switchLoading()" 
+			[disabled]="(selectedFile == null || !validFile)" [hidden]="loading">Identify</button>
+		<div class="text-center" [hidden]="!loading">
+			<p>Processing your image. Please wait...</p>
+			<div class="spinner-border">
+				<span class="visually-hidden">Loading...</span>
+			</div>
+		</div>
 	</div>
 </div>

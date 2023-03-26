@@ -25,16 +25,6 @@ nav {
 	cursor: pointer;
 }
 
-.bg-light-theme {
-    display: block;
-	/* width: 140px;
-	height: 40px; */
-	background: var(--bg-primary);
-	color: whitesmoke;
-	border: 0;
-	transition: all 0.3s ease-in-out;
-	/* font-size: 14px; */
-}
 
 .btn {
 	display: block;
@@ -60,5 +50,5 @@ nav {
 	color: black;
 	background: #F9EA8B;
 	box-shadow: 0 3px 0 0 #9B9989;
-	cursor:not-allowed;
+	cursor: not-allowed;
 }

@@ -1,29 +1,13 @@
-<!-- <div class="card" [hidden]="!prediction"> -->
-<div class="card w-50 h-50 m-auto mb-3" [hidden]="!prediction || prediction.predictionName === ''">
-  <div class="body">
-    <div class="card-body m-auto">
-      <h5 class="card-title text-capitalize">{{prediction.predictionName}}</h5>
-      <div class="d-flex justify-content-center">
+<div class="card text-center w-75 m-auto mb-3" [hidden]="!prediction || prediction.predictionName === '' ">
+  <div class="card-header">Prediction Results</div>
+    <div class="card-body">
+      <h5 class="card-title  text-capitalize">{{prediction.predictionName}}</h5>
+      <div class=" d-flex justify-content-center">
         <p class="card-text">We are {{prediction.predictionScore}}% certain this is a(n)&nbsp;
         <p class="text-capitalize text-"><strong>{{prediction.predictionName}}.</strong></p>
       </div>
-      <a href="{{prediction.learnMoreLink}}" class="btn" target="_blank">Find out more!</a>
-    </div>
-  </div>
-</div>
-
-
-<!-- <div class="row justify-content-center">
-  <div class="col-md-6 my-5">
-    <div class="file-selector text-center">
-      <div class="card-body m-auto">
-        <h5 class="card-title text-capitalize">{{prediction.predictionName}}</h5>
-        <div class="d-flex justify-content-center">
-          <p class="card-text">We are {{prediction.predictionScore}}% certain this is a(n)&nbsp;
-          <p class="text-capitalize text-"><strong>{{prediction.predictionName}}.</strong></p>
-        </div>
+      <div class="row justify-content-center">
         <a href="{{prediction.learnMoreLink}}" class="btn" target="_blank">Find out more!</a>
       </div>
-    </div>
   </div>
-</div> -->
+</div>

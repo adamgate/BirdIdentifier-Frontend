@@ -7,7 +7,10 @@ import { ConnectionCheckerService } from './connection-checker.service';
   styleUrls: ['./connection-alert.component.css']
 })
 export class ConnectionAlertComponent implements OnInit {
- connectionStatusOk: boolean = false;
+ connectionStatus = ConnectionState.connecting;
+
+ // Used for html component checks
+ connectionState = ConnectionState;
 
   constructor(private connectionService: ConnectionCheckerService) { }
 
@@ -15,7 +18,13 @@ export class ConnectionAlertComponent implements OnInit {
     this.connectionService.checkConnectionStatus();
 
     this.connectionService.connectionStatusChangedEvent.subscribe(status => {
-      this.connectionStatusOk = status;
+      this.connectionStatus = status;
     }) 
   }
+}
+
+export enum ConnectionState {
+  connecting,
+  failed,
+  connected
 }

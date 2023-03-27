@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject, catchError, Observable } from 'rxjs';
+import { Subject, retry, delay } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Prediction } from '../../models/prediction';
@@ -29,6 +29,9 @@ export class ImageUploadService {
 
     // Send the post request to the backend
     this.httpClient.post<Prediction>(`${this.urlBase}/images`, formData)
+    .pipe(
+      retry(3),
+      delay(3000))
     .subscribe({
       next: (d) => {
         this.predictions.push(new Prediction(

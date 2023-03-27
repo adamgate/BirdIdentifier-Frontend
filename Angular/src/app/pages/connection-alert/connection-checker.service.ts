@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { delay, retry, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ConnectionState } from './connection-alert.component';
 
 @Injectable({
   providedIn: 'root'
@@ -9,27 +10,30 @@ import { environment } from 'src/environments/environment';
 export class ConnectionCheckerService {
   public urlBase: string = environment.apiUrl;
 
-  connectionStatusChangedEvent = new Subject<boolean>();
-  connectionStatusOk: boolean = false;
+  connectionStatusChangedEvent = new Subject<ConnectionState>();
+  connectionStatus: ConnectionState = ConnectionState.connecting;
 
   constructor(private httpClient: HttpClient) { }
 
   async checkConnectionStatus() {
     await this.httpClient.get(`${this.urlBase}/heartbeat`)
+      .pipe(
+        retry(3),
+        delay(3000))
       .subscribe({
         next: (d) => {
-          this.connectionStatusOk = true;
+          this.connectionStatus = ConnectionState.connected;
           this.send();
-      },
-      error: (e) => {
-        this.connectionStatusOk = false;
-        this.send();
-      }
-    });
-      
+        },
+        error: (e) => {
+          this.connectionStatus = ConnectionState.failed;
+          this.send();
+        }
+      });
+
   }
 
-  send() : void {
-    this.connectionStatusChangedEvent.next(this.connectionStatusOk);
+  send(): void {
+    this.connectionStatusChangedEvent.next(this.connectionStatus);
   }
 }

@@ -12,7 +12,6 @@ export class PredictionItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.prediction = new Prediction('','','ruby throated hummingbird', 55.5,'https://www.google.com/search?q=ruby+throated+hummingbird+bird');
-    // this.prediction = new Prediction('','','', 0,'');
+    this.prediction = new Prediction('','','', 0,'');
   }
 }

@@ -1,13 +1,16 @@
 <div>
-    <div class="alert alert-primary mt-2 text-center" [hidden]="!(connectionStatus === connectionState.connecting)">
+    <div class="alert alert-primary text-center" [hidden]="!(connectionStatus === connectionState.connecting) || isHidden">
         Connecting to the server. Please wait...
+        <button type="button" class="btn-close align-content-end" aria-label="Close" (click)="toggleIsHidden()"></button>
     </div>
 
-    <div class="alert alert-danger mt-2 text-center" [hidden]="!(connectionStatus === connectionState.failed)">
+    <div class="alert alert-danger text-center" [hidden]="!(connectionStatus === connectionState.failed) || isHidden">
         There was an issue connecting to the server. Please try again later.
+        <button type="button" class="btn-close align-content-end" aria-label="Close" (click)="toggleIsHidden()"></button>
     </div>
 
-    <!-- <div class="alert alert-success mt-2 text-center" [hidden]="!(connectionStatus === connectionState.connected)">
+    <div class="alert alert-success text-center" [hidden]="!(connectionStatus === connectionState.connected) || isHidden">
         Successfully connected to the server.
-    </div> -->
+        <button type="button" class="btn-close align-content-end" aria-label="Close" (click)="toggleIsHidden()"></button>
+    </div>
 </div>

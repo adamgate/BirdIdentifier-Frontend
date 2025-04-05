@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
 import { ConnectionCheckerService } from './connection-checker.service';
+
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-connection-alert',
@@ -7,10 +8,10 @@ import { ConnectionCheckerService } from './connection-checker.service';
   styleUrls: ['./connection-alert.component.css']
 })
 export class ConnectionAlertComponent implements OnInit {
- connectionStatus = ConnectionState.connecting;
-
- // Used for html component checks
- connectionState = ConnectionState;
+  connectionStatus = ConnectionState.connecting;
+  // Used for html component checks
+  connectionState = ConnectionState;
+  isHidden: boolean = false;
 
   constructor(private connectionService: ConnectionCheckerService) { }
 
@@ -19,7 +20,11 @@ export class ConnectionAlertComponent implements OnInit {
 
     this.connectionService.connectionStatusChangedEvent.subscribe(status => {
       this.connectionStatus = status;
-    }) 
+    })
+  }
+
+  toggleIsHidden() {
+    this.isHidden = !this.isHidden;
   }
 }
 

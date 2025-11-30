@@ -1,18 +1,23 @@
-<div class="banner bg-warning w-100 p-5">
-    <div class="container text-center">
-        <h1 class="display-5 fw-bold">Welcome to Bird Identifier!</h1>
-        <h3>Bird Identifier is a website designed to help you identify bird species in your pictures.</h3>
-        <p class="lead">Upload an image below and click "Identify" to try it out!</p>
+<div class="banner w-100 p-3 mb-2">
+    <div class="container text-center py-4">
+        <h1 class="display-4 fw-bold mb-3">Welcome to Bird Identifier</h1>
+        <p class="lead mb-2">Upload an image below and let the "advanced" machine learning model identify the bird species for you!</p>
     </div>
 </div>
-<app-connection-alert></app-connection-alert>
-<div class="container main-content">
-    <div class="row align-items-center">
-        <div class="col">
-            <app-image-upload (latestPrediction)="updatePrediction($event)"></app-image-upload>
-        </div>
-    </div>
-</div>
+
 <div class="container">
-    <app-prediction-item [prediction]="prediction"></app-prediction-item>
+  <app-connection-alert></app-connection-alert>
+
+  <div class="main-content mb-5" *ngIf="!prediction">
+    <div class="row align-items-center">
+      <div class="col">
+        <app-image-upload (latestPrediction)="updatePrediction($event)"></app-image-upload>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-5" *ngIf="prediction">
+    <app-prediction-item [prediction]="prediction" (tryAgain)="resetPrediction()"></app-prediction-item>
+  </div>
+
 </div>

@@ -1,16 +1,37 @@
-<div>
-    <div class="alert alert-primary text-center" [hidden]="!(connectionStatus === connectionState.connecting) || isHidden">
-        Connecting to the server. Please wait...
-        <button type="button" class="btn-close align-content-end" aria-label="Close" (click)="toggleIsHidden()"></button>
+<div class="alerts-container">
+    <div class="alert alert-primary d-flex align-items-center justify-content-between"
+         *ngIf="connectionStatus === connectionState.connecting && !isHidden">
+        <div class="d-flex align-items-center">
+            <div class="spinner-border spinner-border-sm me-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <span><strong>Connecting to server...</strong> Please wait while we establish a connection.</span>
+        </div>
+        <button type="button" class="btn-close" aria-label="Close" (click)="toggleIsHidden()"></button>
     </div>
 
-    <div class="alert alert-danger text-center" [hidden]="!(connectionStatus === connectionState.failed) || isHidden">
-        There was an issue connecting to the server. Please try again later.
-        <button type="button" class="btn-close align-content-end" aria-label="Close" (click)="toggleIsHidden()"></button>
+    <div class="alert alert-danger d-flex align-items-center justify-content-between"
+         *ngIf="connectionStatus === connectionState.failed && !isHidden">
+        <div class="d-flex align-items-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-3 flex-shrink-0">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span><strong>Connection failed.</strong> Unable to reach the server. Please try again later.</span>
+        </div>
+        <button type="button" class="btn-close" aria-label="Close" (click)="toggleIsHidden()"></button>
     </div>
 
-    <div class="alert alert-success text-center" [hidden]="!(connectionStatus === connectionState.connected) || isHidden">
-        Successfully connected to the server.
-        <button type="button" class="btn-close align-content-end" aria-label="Close" (click)="toggleIsHidden()"></button>
+    <div class="alert alert-success d-flex align-items-center justify-content-between"
+         *ngIf="connectionStatus === connectionState.connected && !isHidden">
+        <div class="d-flex align-items-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-3 flex-shrink-0">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span><strong>Connected!</strong> Successfully connected to the server.</span>
+        </div>
+        <button type="button" class="btn-close" aria-label="Close" (click)="toggleIsHidden()"></button>
     </div>
 </div>

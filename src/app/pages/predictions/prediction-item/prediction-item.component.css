@@ -1,14 +1,164 @@
-.card {
-	border-radius: 5px;
-	border: 1px solid var(--bg-secondary)
+.prediction-showcase {
+  max-width: 700px;
+  margin: 0 auto;
+  animation: zoomIn 0.5s ease;
+  padding: 0 1rem;
+}
 
+.card-result {
+  border: none;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  background: white;
 }
 
 .card-header {
-	background-color: var(--bg-secondary);
-	color: white;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  padding: 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
 }
 
-a:active {
-	background-color: var(--bg-secondary);
+.card-header svg {
+  flex-shrink: 0;
+}
+
+.card-body {
+  padding: 3rem 2rem;
+  background: white;
+}
+
+.bird-icon {
+  font-size: 6rem;
+  animation: bounce 1s ease;
+  line-height: 1;
+}
+
+.bird-name {
+  color: var(--text-primary);
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.confidence-mini {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confidence-badge {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+  color: var(--bg-primary);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1.125rem;
+  border: 2px solid rgba(79, 70, 229, 0.2);
+}
+
+.action-buttons {
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  min-width: 240px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--hl-primary) 0%, var(--hl-secondary) 100%);
+  border: none;
+  box-shadow: var(--shadow-md);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  color: white;
+}
+
+.btn-secondary {
+  background: white;
+  border: 2px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-light);
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.btn svg {
+  flex-shrink: 0;
+}
+
+/* Animations */
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 2rem 1.5rem;
+  }
+
+  .bird-icon {
+    font-size: 4.5rem;
+  }
+
+  .bird-name {
+    font-size: 2rem;
+  }
+
+  .confidence-badge {
+    font-size: 1rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .card-header {
+    font-size: 1.125rem;
+    padding: 1rem;
+  }
 }

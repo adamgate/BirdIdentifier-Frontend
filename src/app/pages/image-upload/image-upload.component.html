@@ -1,37 +1,91 @@
-<div class="jumbotron">
-	<h2>Identify</h2>
-	<p>
-		Please make sure that the bird is clearly visible and is the focus of the image.
-		<br>
-		We recommend that the image is no larger than 1000x1000 pixels.
-	</p>
+<div class="upload-container">
+	<div class="text-center mb-4">
+		<h2 class="fw-bold mb-3">Identify Your Bird</h2>
+		<p class="text-muted">
+			For best results, ensure the bird is clearly visible and centered in the image.
+			<br>
+			We recommend images no larger than 1000×1000 pixels.
+		</p>
+	</div>
+
+	<!-- Status Messages - Moved to top -->
+	<div class="mb-3">
+		<div class="alert alert-danger d-flex align-items-center" *ngIf="(selectedFile != null && !validFile) && error == null">
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2">
+				<circle cx="12" cy="12" r="10"></circle>
+				<line x1="15" y1="9" x2="9" y2="15"></line>
+				<line x1="9" y1="9" x2="15" y2="15"></line>
+			</svg>
+			<span>Incorrect file type. Please select a PNG or JPG image.</span>
+		</div>
+
+		<div class="alert alert-danger d-flex align-items-center" *ngIf="error != null">
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2">
+				<circle cx="12" cy="12" r="10"></circle>
+				<line x1="12" y1="8" x2="12" y2="12"></line>
+				<line x1="12" y1="16" x2="12.01" y2="16"></line>
+			</svg>
+			<span>Error: {{error}}. Please try again later.</span>
+		</div>
+	</div>
+
 	<div class="row justify-content-center">
-		<div class="col-md-6 my-5">
-			<div class="file-selector text-center">
-				<h3>Select Image</h3>
+		<div class="col-md-8">
+			<!-- File Upload Section - Shows when no file selected -->
+			<div class="file-selector text-center" *ngIf="!selectedFile && !loading">
+				<div class="upload-icon mb-3">
+					<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+						<polyline points="17 8 12 3 7 8"></polyline>
+						<line x1="12" y1="3" x2="12" y2="15"></line>
+					</svg>
+				</div>
+				<h4 class="mb-3">Drop your image here or click to browse</h4>
 				<input type="file" class="file-input" accept=".png,.jpg,.jpeg" (change)="onFileSelected($event)" />
+				<p class="text-muted mt-2 mb-0">Supported formats: PNG, JPG</p>
 			</div>
-			<div>
-				<!-- TODO- ensure that whichever was caused by the most recent action is the only visible one. -->
-				<p class="danger text-center" *ngIf="(selectedFile != null && !validFile) && error == null">Incorrect filetype. Please select a PNG or JPEG.</p>
-				<p class="ready text-center" *ngIf="(selectedFile != null && validFile) && error == null">Your file is ready for upload.</p>
-				<p class="danger text-center" *ngIf="error != null">There was an error: "{{error}}". Please try again later.</p>
-				
+
+			<!-- Image Preview + Actions - Shows when file selected -->
+			<div class="image-actions-container" *ngIf="selectedFile && validFile && !loading">
+				<div class="d-flex align-items-center gap-3 flex-wrap justify-content-center">
+					<!-- Image Thumbnail -->
+					<div class="image-thumbnail">
+						<img [src]="img" alt="Selected image">
+					</div>
+
+					<!-- Action Buttons -->
+					<div class="d-flex gap-2 flex-wrap">
+						<button
+							type="button"
+							class="btn btn-primary btn-lg"
+							(click)="onUpload(); switchLoading()">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2" style="display: inline-block; vertical-align: middle;">
+								<path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+							</svg>
+							Identify Bird
+						</button>
+
+						<button
+							type="button"
+							class="btn btn-secondary btn-lg"
+							(click)="clearSelection()">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2" style="display: inline-block; vertical-align: middle;">
+								<line x1="18" y1="6" x2="6" y2="18"></line>
+								<line x1="6" y1="6" x2="18" y2="18"></line>
+							</svg>
+							Choose Different Image
+						</button>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-	<div class="row justify-content-center">
-		<div class="col-md-6" [hidden]="!img || !validFile">
-			<img src="{{img}}" alt="Uploaded image" class="img-fluid">
-		</div>
-	</div>
-	<div class="row justify-content-center mt-5">
-		<button type="button" class="btn" name="uploadbutton" (click)="onUpload(); switchLoading()" 
-			[disabled]="(selectedFile == null || !validFile)" [hidden]="loading">Identify</button>
-		<div class="text-center" [hidden]="!loading">
-			<p>Processing your image. Please wait...</p>
-			<div class="spinner-border">
-				<span class="visually-hidden">Loading...</span>
+
+			<!-- Loading Spinner -->
+			<div class="text-center" *ngIf="loading">
+				<div class="loading-container">
+					<div class="spinner-border mb-3"></div>
+					<p class="fw-semibold">Analyzing your image...</p>
+					<p class="text-muted">This may take a few moments</p>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1,16 +1,23 @@
 <footer class="footer">
-    <div class="container">
-      <h3>Adam Applegate</h3>
-      <div class="social-links">
-            <a href="https://adamgate.github.io" target="_blank" title="Check out my portfolio"><i class="bx bx-user-circle"></i></a>
-            <a href="https://www.linkedin.com/in/adam-applegate" target="_blank" title="Visit my LinkedIn"><i class="bx bxl-linkedin"></i></a>
-            <a href="https://github.com/adamgate" target="_blank" title="Visit my Github"><i class="bx bxl-github"></i></a>
+    <div class="container py-4">
+      <div class="footer-content">
+        <div class="social-links mb-4">
+          <a href="https://adamgate.github.io" target="_blank" title="Check out my portfolio" class="social-link">
+            <i class="bx bx-user-circle"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/adam-applegate" target="_blank" title="Visit my LinkedIn" class="social-link">
+            <i class="bx bxl-linkedin"></i>
+          </a>
+          <a href="https://github.com/adamgate" target="_blank" title="Visit my Github" class="social-link">
+            <i class="bx bxl-github"></i>
+          </a>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="copyright mb-0">
+            © {{currentYear | date:'yyyy'}} <strong>Adam Applegate</strong>. All Rights Reserved
+          </p>
+        </div>
       </div>
-      <div class="blurb">
-        <p>Want to learn about how this web app was made? Click <a href="https://adamgate.github.io#portfolio" target="_blank">here</a>!</p>
     </div>
-      <div class="copyright">
-        &copy; Copyright {{currentYear | date:'yyyy'}} <strong><span>Adam Applegate</span></strong>. All Rights Reserved
-      </div>
-    </div>
-  </footer>
+</footer>

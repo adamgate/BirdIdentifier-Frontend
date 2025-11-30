@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Prediction } from 'src/app/models/prediction';
 
 @Component({
@@ -8,10 +8,13 @@ import { Prediction } from 'src/app/models/prediction';
 })
 export class PredictionItemComponent implements OnInit {
   @Input() prediction: Prediction;
+  @Output() tryAgain = new EventEmitter<void>();
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.prediction = new Prediction('','','', 0,'');
+  ngOnInit(): void { }
+
+  onTryAgain() {
+    this.tryAgain.emit();
   }
 }

@@ -21,14 +21,14 @@ export class ImageUploadComponent implements OnInit {
   constructor(private imageUploadService: ImageUploadService) { }
 
   ngOnInit(): void {
-      this.predictions = this.imageUploadService.getPredictions();
+    this.predictions = this.imageUploadService.getPredictions();
 
-      this.imageUploadService.predictionListChangedEvent.subscribe(result => {
-        this.predictions = result;
-        this.addLatestPrediction(this.predictions[this.predictions.length - 1]);
+    this.imageUploadService.predictionListChangedEvent.subscribe(result => {
+      this.predictions = result;
+      this.addLatestPrediction(this.predictions[this.predictions.length - 1]);
 
-        //Turn the loading spinner off
-        this.switchLoading();
+      //Turn the loading spinner off
+      this.switchLoading();
     });
 
     this.imageUploadService.errorChangedEvent.subscribe(error => {
@@ -71,6 +71,17 @@ export class ImageUploadComponent implements OnInit {
       return;
 
     this.imageUploadService.uploadImage(<File>this.selectedFile);
+  }
+
+  /*
+   * Clear the current selection and allow user to choose a new image
+   */
+  clearSelection() {
+    this.selectedFile = null;
+    this.validFile = false;
+    this.img = null;
+    this.fileName = null;
+    this.error = null;
   }
 
   /*

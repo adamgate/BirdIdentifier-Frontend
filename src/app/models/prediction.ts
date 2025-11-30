@@ -1,10 +1,8 @@
 export class Prediction {
-    constructor(
-        public imageChecksum: string,
-        public timestamp: string,
-        public predictionName: string,
-        public predictionScore: number,
-        public learnMoreLink: string
-    ) {}
+  constructor(
+    public timestamp: string,
+    public name: string,
+    public score: number,
+    public learnMoreLink: string
+  ) { }
 }
-

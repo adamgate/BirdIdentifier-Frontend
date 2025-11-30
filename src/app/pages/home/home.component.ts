@@ -19,4 +19,8 @@ export class HomeComponent implements OnInit {
     this.prediction = prediction;
   }
 
+  resetPrediction() {
+    this.prediction = null;
+  }
+
 }

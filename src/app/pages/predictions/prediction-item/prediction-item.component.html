@@ -9,17 +9,17 @@
     </div>
     <div class="card-body text-center">
       <div class="bird-icon mb-4">
-        🐦
+        {{'🐦'}}
       </div>
 
-      <h2 class="bird-name text-capitalize mb-2">{{prediction.name ?? "Error Getting Data"}}</h2>
+      <h2 class="bird-name text-capitalize mb-2">{{isABird ? prediction.name : 'That\'s not a bird...'}}</h2>
 
       <div class="confidence-mini mb-4">
-        <span class="confidence-badge">{{prediction.score ?? "??"}}% Match</span>
+        <span class="confidence-badge">{{prediction.score ?? "??"}}% {{isABird ? 'Match' : 'chance this isn\'t a bird.'}}</span>
       </div>
 
-      <div class="action-buttons d-flex flex-column flex-md-row gap-3 justify-content-center align-items-center mt-4">
-        <a [href]="prediction.learnMoreLink" class="btn btn-primary" target="_blank">
+      <div class="action-buttons d-flex flex-column flex-md-row gap-3 justify-content-center align-items-center mt-4" >
+        <a [href]="prediction.learnMoreLink" class="btn btn-primary" target="_blank" *ngIf=isABird>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2" style="display: inline-block; vertical-align: middle;">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M12 16v-4"></path>

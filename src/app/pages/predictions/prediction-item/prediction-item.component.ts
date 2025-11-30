@@ -9,10 +9,13 @@ import { Prediction } from 'src/app/models/prediction';
 export class PredictionItemComponent implements OnInit {
   @Input() prediction: Prediction;
   @Output() tryAgain = new EventEmitter<void>();
+  isABird: boolean = true;
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.isABird = this.prediction.name !== 'not bird'
+  }
 
   onTryAgain() {
     this.tryAgain.emit();

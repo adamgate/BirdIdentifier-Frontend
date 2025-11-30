@@ -10,10 +10,14 @@ import { Prediction } from '../../models/prediction';
 })
 export class ImageUploadService {
   public urlBase: string = environment.apiUrl;
+  public birdClassificationV1Url: string = 'birds/identification/classify?version=1';
+  public birdClassificationV2Url: string = 'birds/identification/classify?version=2';
+  public birdPersonaUrl: string = 'birds/identification/persona';
 
   errorChangedEvent = new Subject<string>();
   predictionListChangedEvent = new Subject<Prediction[]>();
   predictions: Prediction[] = [];
+  selectedEndpoint: string = this.birdClassificationV1Url;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -22,7 +26,7 @@ export class ImageUploadService {
     formData.append('image', selectedFile, selectedFile.name);
 
     // Send the post request to the backend
-    this.httpClient.post<Prediction>(`${this.urlBase}/birds/identification/classify`, formData)
+    this.httpClient.post<Prediction>(`${this.urlBase}/${this.selectedEndpoint}`, formData)
       .pipe(
         retry(3),
         delay(3000))
